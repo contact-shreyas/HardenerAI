@@ -1,0 +1,62 @@
+{
+  "name": "@hardener/config-hardening",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "AI-Driven Cybersecurity Config Hardening for SMEs (Nginx/Docker/Kubernetes)",
+  "main": "dist/index.js",
+  "bin": {
+    "hardener": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "harden": "node dist/cli.js",
+    "harden:dry-run": "node dist/cli.js --dry-run",
+    "harden:with-rollback": "node dist/cli.js --apply --enable-rollback",
+    "clean": "rm -rf dist .hardener/snapshots .hardener/reports",
+    "integration-test": "vitest run tests/integration",
+    "fixtures:inspect": "node dist/tools/inspect-fixtures.js",
+    "metrics": "node dist/tools/metrics.js",
+    "dashboard": "pnpm --filter @hardener/dashboard dev",
+    "dashboard:build": "pnpm --filter @hardener/dashboard build",
+    "dashboard:start": "pnpm --filter @hardener/dashboard start"
+  },
+  "keywords": [
+    "security",
+    "hardening",
+    "nginx",
+    "docker",
+    "kubernetes",
+    "risk-scoring",
+    "remediation"
+  ],
+  "author": "Security Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitest/coverage-v8": "^1.0.4",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-security": "^1.7.1",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.4"
+  },
+  "dependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/minimist": "^1.2.5",
+    "js-yaml": "^4.1.0",
+    "minimist": "^1.2.8",
+    "zod": "^3.23.8"
+  }
+}

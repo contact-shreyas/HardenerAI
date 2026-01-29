@@ -1,0 +1,48 @@
+node_modules/
+dist/
+.hardener/
+.hardener-test/
+.env
+.env.local
+*.log
+coverage/
+.DS_Store
+
+# Next.js
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Build outputs
+build/
+*.tgz
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Test outputs
+.hardener-test/
+test-results/

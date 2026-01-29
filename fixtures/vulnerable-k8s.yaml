@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vulnerable-pod
+  namespace: default
+spec:
+  # SECURITY ISSUE: Privileged container
+  containers:
+  - name: app
+    image: nginx:latest
+    
+    # SECURITY ISSUE: Running as root
+    securityContext:
+      privileged: true
+      runAsUser: 0
+    
+    # SECURITY ISSUE: No resource limits
+    ports:
+    - containerPort: 80
+      hostPort: 8080
+      protocol: TCP
+    
+    # SECURITY ISSUE: No network policies
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulnerable-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vulnerable
+  template:
+    metadata:
+      labels:
+        app: vulnerable
+    spec:
+      # SECURITY ISSUE: No pod security standards
+      containers:
+      - name: app
+        image: nginx:latest
+        
+        # SECURITY ISSUE: No resource constraints
+        securityContext:
+          runAsUser: 0
+          privileged: true
+        
+        ports:
+        - containerPort: 80

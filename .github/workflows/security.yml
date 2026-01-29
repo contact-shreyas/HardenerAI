@@ -1,0 +1,55 @@
+name: Security Analysis - Hardening Tool Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    - cron: '0 2 * * 0' # Weekly security scan
+
+jobs:
+  security-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      - name: Build
+        run: pnpm build
+      
+      - name: Run ESLint security checks
+        run: pnpm lint
+      
+      - name: Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+      
+      - name: Dependency audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+  dependency-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check dependency security
+        uses: jeremylong/DependencyCheck_Action@main
+        with:
+          project: 'hardener'
+          path: '.'
+          format: 'JSON'
