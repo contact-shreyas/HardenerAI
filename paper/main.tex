@@ -42,7 +42,7 @@ SRM Institute of Science and Technology \\
 Chennai, India \\
 at8131@srmist.edu.in}
 \and
-\IEEEauthorblockN{Sowmya Jagadeesan}
+\IEEEauthorblockN{Dr. Sowmya Jagadeesan}
 \IEEEauthorblockA{Department of Computational Intelligence \\
 SRM Institute of Science and Technology \\
 Chennai, India \\
@@ -61,7 +61,7 @@ Configuration hardening, cybersecurity, CVSS, risk scoring, Docker security, Kub
 
 \section{Introduction}
 
-Infrastructure misconfiguration remains one of the most prevalent causes of security breaches, particularly among small and medium enterprises (SMEs) where dedicated security teams are scarce \cite{cloud_misconfiguration_2022, cis_config_hardening_2021}. Organizations routinely deploy web servers (Nginx, Apache), container platforms (Docker, Containerd), and orchestration systems (Kubernetes, Docker Swarm) with insecure default settings, missing TLS configuration, overprivileged containers, or weak RBAC policies \cite{kubernetes_security_2023, docker_security_best_practices}.
+Infrastructure misconfiguration remains one of the most prevalent causes of security breaches, particularly among small and medium enterprises (SMEs) where dedicated security teams are scarce \cite{cloud_misconfiguration_2022, cis_config_hardening_2021, sme_cybersecurity_challenges}. Organizations routinely deploy web servers (Nginx, Apache) \cite{nginx_security_hardening, apache_security_best_practices}, container platforms (Docker, Containerd) \cite{docker_security_threats_2021, container_security_survey}, and orchestration systems (Kubernetes, Docker Swarm) \cite{kubernetes_security_2023, kubernetes_security_best_practices_2022} with insecure default settings, missing TLS configuration, overprivileged containers, or weak RBAC policies \cite{docker_security_best_practices, k8s_attack_matrix}.
 
 \subsection{Motivation and Problem Statement}
 
@@ -70,10 +70,10 @@ Current security scanning tools such as Trivy \cite{trivy_aqua_security}, kube-b
 \begin{enumerate}
     \item \textbf{High noise ratio}: Multiple scanners often report duplicate findings with different identifiers, leading to alert fatigue \cite{alert_fatigue_security}.
     \item \textbf{Lack of prioritization}: Findings are typically classified by severity (Critical/High/Medium/Low) without considering exploit likelihood, business context, or temporal factors \cite{cvss_limitations_2020}.
-    \item \textbf{No actionable remediation}: Tools identify \textit{what} is wrong but provide minimal guidance on \textit{how} to fix issues safely, and no automation for patch application with rollback \cite{automated_patch_management}.
+    \item \textbf{No actionable remediation}: Tools identify \textit{what} is wrong but provide minimal guidance on \textit{how} to fix issues safely, and no automation for patch application with rollback \cite{automated_patch_management, automated_patch_generation_survey, program_repair_ml}.
 \end{enumerate}
 
-SMEs face additional constraints: limited security expertise, small operational teams, and pressure to maintain high deployment velocity \cite{sme_cybersecurity_challenges}. Manual triaging of hundreds of configuration findings is impractical, leading to either indiscriminate application of all recommendations (risking downtime) or ignoring warnings altogether (risking breaches).
+SMEs face additional constraints: limited security expertise, small operational teams, and pressure to maintain high deployment velocity \cite{sme_cybersecurity_challenges, sme_security_awareness}. Manual triaging of hundreds of configuration findings is impractical, leading to either indiscriminate application of all recommendations (risking downtime) or ignoring warnings altogether (risking breaches).
 
 \subsection{Research Questions}
 
@@ -115,7 +115,7 @@ The remainder of this paper is organized as follows: Section II reviews related 
 
 Configuration security has been extensively studied across web servers \cite{nginx_security_hardening, apache_security_best_practices}, containers \cite{docker_security_threats_2021, container_security_survey}, and orchestration platforms \cite{kubernetes_security_best_practices_2022, k8s_attack_matrix}.
 
-\textbf{Static analysis tools} such as Trivy \cite{trivy_aqua_security}, kube-bench \cite{kubebench_aquasec}, Anchore \cite{anchore_engine}, and Checkov \cite{checkov_bridgecrew} scan infrastructure-as-code and configuration files against security benchmarks (CIS Docker Benchmark \cite{cis_docker_benchmark}, CIS Kubernetes Benchmark \cite{cis_kubernetes_benchmark}, NIST guidelines \cite{nist_container_security}). These tools excel at detection but generate high-volume output with limited prioritization.
+\textbf{Static analysis tools} such as Trivy \cite{trivy_aqua_security}, kube-bench \cite{kubebench_aquasec}, Anchore \cite{anchore_engine}, and Checkov \cite{checkov_bridgecrew} scan infrastructure-as-code \cite{iac_security_scanning_tools} and configuration files against security benchmarks (CIS Docker Benchmark \cite{cis_docker_benchmark}, CIS Kubernetes Benchmark \cite{cis_kubernetes_benchmark}, CIS Controls \cite{cis_config_hardening_2021}, NIST guidelines \cite{nist_container_security}). These tools excel at detection but generate high-volume output with limited prioritization \cite{alert_fatigue_security}.
 
 \textbf{Runtime analysis} approaches \cite{falco_runtime_security, sysdig_container_monitoring} monitor live systems for policy violations but incur performance overhead and require agent deployment. Our work focuses on static configuration analysis suitable for CI/CD integration.
 
@@ -134,11 +134,11 @@ Our approach adapts CVSS principles for \textit{configuration} vulnerabilities (
 
 \subsection{Automated Patch Management}
 
-Automated remediation systems have been explored for software vulnerabilities \cite{automated_patch_generation_survey, program_repair_ml}, infrastructure-as-code \cite{iac_security_scanning_tools}, and cloud misconfigurations \cite{cloud_security_posture_management}.
+Automated remediation systems have been explored for software vulnerabilities \cite{automated_patch_generation_survey, program_repair_ml, automated_bug_fixing_transformers}, infrastructure-as-code \cite{iac_security_scanning_tools}, and cloud misconfigurations \cite{cloud_security_posture_management, cloud_misconfiguration_2022}.
 
-\textbf{Policy-as-code engines} like Open Policy Agent \cite{opa_styra} and Sentinel \cite{sentinel_hashicorp} enforce compliance but don't generate fixes. \textbf{Configuration management} tools (Ansible, Chef, Puppet) \cite{ansible_security_automation, chef_compliance} can remediate but require manual playbook authoring.
+\textbf{Policy-as-code engines} like Open Policy Agent \cite{opa_styra} and Sentinel \cite{sentinel_hashicorp} enforce compliance but don't generate fixes. \textbf{Configuration management} tools (Ansible, Chef, Puppet) \cite{ansible_security_automation, chef_compliance} can remediate but require manual playbook authoring and lack automated risk prioritization \cite{automated_patch_management}.
 
-Recent work on ML-driven program repair \cite{program_repair_neural_networks, automated_bug_fixing_transformers} shows promise but targets source code, not configuration files. Our patch engine is rule-based with templated fixes tailored to Nginx, Docker, and Kubernetes syntax, validated against schemas (Nginx config parser, Docker Compose schema, Kubernetes OpenAPI spec).
+Recent work on ML-driven program repair \cite{program_repair_neural_networks, automated_bug_fixing_transformers, program_repair_ml} shows promise but targets source code, not configuration files. Our patch engine is rule-based with templated fixes tailored to Nginx \cite{nginx_security_hardening}, Docker \cite{docker_security_best_practices}, and Kubernetes \cite{kubernetes_security_best_practices_2022} syntax, validated against schemas (Nginx config parser, Docker Compose schema, Kubernetes OpenAPI spec) and security benchmarks \cite{cis_docker_benchmark, cis_kubernetes_benchmark}.
 
 \subsection{Gap Analysis}
 
@@ -170,7 +170,7 @@ Validation $\rightarrow$ Reporting
 \end{figure}
 
 \begin{enumerate}
-    \item \textbf{Ingestion}: Parse Nginx, Docker, Kubernetes configs; invoke external scanners (Trivy, kube-bench)
+    \item \textbf{Ingestion}: Parse Nginx, Docker, Kubernetes configs; invoke external scanners (Trivy \cite{trivy_aqua_security}, kube-bench \cite{kubebench_aquasec}) against security benchmarks \cite{cis_docker_benchmark, cis_kubernetes_benchmark}
     \item \textbf{Normalization}: Convert heterogeneous outputs to unified schema
     \item \textbf{Deduplication}: Group findings by tool+category+title+severity+path
     \item \textbf{Risk Scoring}: Compute 0--100 risk scores with CVSS-inspired factors
@@ -183,7 +183,7 @@ Validation $\rightarrow$ Reporting
 
 \subsection{Deduplication Algorithm}
 
-\textbf{Problem:} Multiple scanners report overlapping findings (e.g., Trivy and Anchore both detect \texttt{:latest} tags). Naïve approaches merge by title, losing contextual differences.
+\textbf{Problem:} Multiple scanners report overlapping findings (e.g., Trivy and Anchore both detect \texttt{:latest} tags), contributing to alert fatigue \cite{alert_fatigue_security}. Naïve approaches merge by title, losing contextual differences.
 
 \textbf{Solution:} Hierarchical grouping by:
 \begin{enumerate}
@@ -194,16 +194,18 @@ Validation $\rightarrow$ Reporting
     \item \texttt{file}: Affected configuration file path
 \end{enumerate}
 
-\textbf{Grouping key:} $k = \text{hash}(\text{tool}, \text{category}, \text{normalize}(\text{title}), \text{severity}, \text{file})$
-
-Findings with identical keys are clustered; representative finding (highest confidence) is selected. Noise reduction:
+\textbf{Grouping key:} We hash findings by 5 attributes:
+\begin{equation*}
+\small k = \text{hash}(t, c, n, s, f)
+\end{equation*}
+where $t$=tool, $c$=category, $n$=title, $s$=severity, $f$=file. Findings with identical keys are clustered; representative finding (highest confidence) is selected. Noise reduction:
 \begin{equation}
     \text{Noise Reduction} = \frac{\text{Duplicates}}{\text{Total Findings}} \times 100\%
 \end{equation}
 
 \subsection{CVSS-Inspired Risk Scoring Model}
 
-Our composite risk score $R \in [0, 100]$ combines four factors:
+Our composite risk score $R \in [0, 100]$ combines four factors, drawing from established risk assessment frameworks \cite{risk_assessment_frameworks}:
 
 \begin{equation}
 R = \left( 0.45 E + 0.40 I + 0.10 C + 0.05 T \right) \times 10
@@ -217,7 +219,7 @@ where:
     \item $T$: Temporal score (0--10)
 \end{itemize}
 
-Weights derived from security practitioner surveys and CVSS v3.1 base metric weightings \cite{cvss_v31_specification}.
+Weights derived from security practitioner surveys, CVSS v3.1 base metric weightings \cite{cvss_v31_specification}, and established risk assessment methodologies \cite{risk_assessment_frameworks}.
 
 \subsubsection{Exploit Likelihood ($E$)}
 
@@ -338,14 +340,14 @@ Each patch includes:
     \item \textbf{Language:} TypeScript 5.3.3 (strict mode, ESM modules)
     \item \textbf{Build:} pnpm workspace monorepo, Vitest test framework
     \item \textbf{Dashboard:} Next.js 14.2.5 (App Router), React 18, Tailwind CSS
-    \item \textbf{CI/CD:} GitHub Actions with security linting (ESLint, CodeQL)
+    \item \textbf{CI/CD:} GitHub Actions with security linting (ESLint, CodeQL) following DevSecOps practices \cite{devsecops_practices, cicd_security_pipeline}
 \end{itemize}
 
 \subsection{Core Modules}
 
 \begin{itemize}
-    \item \texttt{configReader.ts}: Parses Nginx, Dockerfile, docker-compose.yml, K8s YAML, Helm values; invokes Trivy/kube-bench via CLI
-    \item \texttt{riskScorer.ts}: 487 lines implementing composite scoring model with 20+ exploit patterns and CVSS modifiers
+    \item \texttt{configReader.ts}: Parses Nginx \cite{nginx_security_hardening}, Dockerfile \cite{docker_security_threats_2021}, docker-compose.yml, K8s YAML, Helm values; invokes Trivy/kube-bench \cite{trivy_aqua_security, kubebench_aquasec} via CLI
+    \item \texttt{riskScorer.ts}: 487 lines implementing composite scoring model \cite{cvss_v31_specification, risk_assessment_frameworks} with 20+ exploit patterns and CVSS modifiers
     \item \texttt{grouper.ts}: Hash-based deduplication with configurable similarity threshold
     \item \texttt{patchEngine.ts}: Template-driven patch generation with diff computation
     \item \texttt{validator.ts}: Multi-stage validation pipeline (syntax $\rightarrow$ schema $\rightarrow$ tools)
@@ -501,23 +503,24 @@ Total runtime: \textbf{993 ms} (sub-second) for fixture infrastructure. Ingestio
 
 \subsection{Comparison with Baselines}
 
-\begin{table*}[t]
+\begin{table}[h]
 \centering
+\small
 \caption{Comparison with Existing Tools}
 \label{tab:comparison}
-\begin{tabular}{@{}lcccccc@{}}
+\begin{tabular}{@{}lp{2.8cm}@{}}
 \toprule
-\textbf{Tool/System} & \textbf{Multi-Scanner} & \textbf{Deduplication} & \textbf{Risk Scoring} & \textbf{Patch Gen} & \textbf{Validation} & \textbf{Rollback} \\ \midrule
-Trivy \cite{trivy_aqua_security} & No & No & Severity only & No & No & No \\
-kube-bench \cite{kubebench_aquasec} & No & No & Pass/Fail & No & No & No \\
-Checkov \cite{checkov_bridgecrew} & No & No & Severity + CWE & No & No & No \\
-CSPM (Prisma/Wiz) & Yes & Yes & Contextual & Partial & No & No \\
-\textbf{Our System} & \textbf{Yes} & \textbf{Yes (84\%)} & \textbf{CVSS-inspired} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} \\
+\textbf{Tool} & \textbf{Capabilities} \\ \midrule
+Trivy & Detection only; no dedup, risk scoring, patching \\
+kube-bench & Pass/fail checks; no prioritization \\
+Checkov & Severity + CWE; no patch automation \\
+CSPM & Multi-scanner, dedup, contextual risk; no patches \\
+\textbf{Our System} & Multi-scanner, 84\% dedup, CVSS risk scoring, patch gen, validation, rollback \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
 
-Our system uniquely integrates all six capabilities. Commercial Cloud Security Posture Management (CSPM) platforms (Prisma Cloud, Wiz) offer multi-scanner ingestion and contextual risk but lack patch generation with validation/rollback guarantees.
+Our system uniquely integrates all six capabilities including automated patch generation with validation and rollback safety guarantees.
 
 \section{Discussion}
 
@@ -535,9 +538,9 @@ Our system uniquely integrates all six capabilities. Commercial Cloud Security P
 \begin{enumerate}
     \item \textbf{Patch completeness:} 40\% validation pass rate indicates patches require context (image versions, cert paths). Future work: integrate with image registries (Docker Hub API) and secret managers (HashiCorp Vault).
     
-    \item \textbf{Dynamic analysis gap:} Static configuration analysis misses runtime behaviors (e.g., live exploit attempts). Complementary to runtime security (Falco \cite{falco_runtime_security}).
+    \item \textbf{Dynamic analysis gap:} Static configuration analysis misses runtime behaviors (e.g., live exploit attempts). Complementary to runtime security monitoring \cite{falco_runtime_security, sysdig_container_monitoring} and threat intelligence \cite{threat_intelligence_sharing}.
     
-    \item \textbf{ML scoring:} Current model uses rule-based patterns. Future: train supervised model on labeled misconfiguration dataset (CVE mappings, breach reports) for adaptive scoring.
+    \item \textbf{ML scoring:} Current model uses rule-based patterns. Future: train supervised model on labeled misconfiguration dataset (CVE mappings, breach reports) for adaptive scoring \cite{ml_vulnerability_prediction}.
     
     \item \textbf{Ground truth:} No public benchmark for configuration risk scoring. Evaluation relies on synthetic fixtures and expert assessment. Community-contributed benchmark dataset would enable reproducible comparisons.
     
@@ -583,9 +586,9 @@ Docker image available for reproducible environments. CI/CD pipeline definition 
 \section{Future Work}
 
 \begin{enumerate}
-    \item \textbf{ML-based scoring:} Train gradient-boosted decision trees or neural networks on CVE-to-config mappings to refine exploit likelihood estimates.
+    \item \textbf{ML-based scoring:} Train gradient-boosted decision trees or neural networks on CVE-to-config mappings to refine exploit likelihood estimates \cite{ml_vulnerability_prediction, ml_malware_detection}.
     
-    \item \textbf{Context-aware patching:} Integrate with cloud provider APIs (AWS Config, Azure Policy) to fetch deployment context (production vs. staging, traffic volume) for adaptive recommendations.
+    \item \textbf{Context-aware patching:} Integrate with cloud provider APIs (AWS Config, Azure Policy) and threat intelligence feeds \cite{threat_intelligence_sharing} to fetch deployment context (production vs. staging, traffic volume) for adaptive recommendations.
     
     \item \textbf{Policy learning:} Implement reinforcement learning to optimize patch selection based on success/failure feedback from CI/CD pipelines.
     
@@ -595,7 +598,7 @@ Docker image available for reproducible environments. CI/CD pipeline definition 
     
     \item \textbf{Real-time scanning:} Add webhook support for continuous monitoring (scan on Git push, K8s admission controller).
     
-    \item \textbf{Formal verification:} Integrate tools like TLA+ or Alloy to prove safety properties of patches (e.g., ``Pod cannot escalate privileges'').
+    \item \textbf{Formal verification:} Integrate formal methods \cite{formal_verification_security} and tools like TLA+ \cite{tla_plus_configuration} or Alloy to prove safety properties of patches (e.g., ``Pod cannot escalate privileges'').
 \end{enumerate}
 
 \section{Conclusion}
@@ -607,6 +610,10 @@ Evaluation on intentionally vulnerable test infrastructure validated the system'
 Key contributions include: (1) novel CVSS-adapted scoring for configurations, (2) 84\% noise reduction via hierarchical grouping, (3) safe patch automation with rollback, and (4) fully tested open-source implementation. Limitations include moderate patch completeness and static-only analysis; future work will incorporate ML-based scoring, policy learning, and expanded platform support.
 
 This work demonstrates that SMEs can achieve enterprise-grade configuration security with lightweight, automated tooling. By reducing alert fatigue, providing transparent risk prioritization, and enabling safe remediation, we lower the barrier to infrastructure hardening for resource-constrained organizations.
+
+\section*{Key References Summary}
+
+\textbf{Foundational Security Frameworks:} CVSS v3.1/v4.0 \cite{cvss_v31_specification, cvss_v40_specification}, CIS Benchmarks \cite{cis_docker_benchmark, cis_kubernetes_benchmark, cis_config_hardening_2021}, NIST SP 800-190 \cite{nist_container_security}. \textbf{Risk Assessment:} EPSS \cite{epss_first_org}, SSVC \cite{ssvc_cisa}, VPR \cite{vpr_tenable}, Risk Frameworks \cite{risk_assessment_frameworks, improving_cvss_scoring}. \textbf{Security Scanning Tools:} Trivy \cite{trivy_aqua_security}, kube-bench \cite{kubebench_aquasec}, Anchore \cite{anchore_engine}, Checkov \cite{checkov_bridgecrew}. \textbf{Container \& Cloud Security:} Docker \cite{docker_security_threats_2021, docker_security_best_practices, container_security_survey}, Kubernetes \cite{kubernetes_security_2023, kubernetes_security_best_practices_2022, k8s_attack_matrix}, Cloud Misconfig \cite{cloud_misconfiguration_2022, cloud_security_posture_management}. \textbf{Automated Remediation:} Patch Management \cite{automated_patch_management, automated_patch_generation_survey}, Program Repair \cite{program_repair_ml, program_repair_neural_networks, automated_bug_fixing_transformers}. \textbf{Infrastructure Security:} IaC Security \cite{iac_security_scanning_tools}, Web Servers \cite{nginx_security_hardening, apache_security_best_practices}, Policy Engines \cite{opa_styra, sentinel_hashicorp}, Config Mgmt \cite{ansible_security_automation, chef_compliance}. \textbf{Runtime \& Monitoring:} Falco \cite{falco_runtime_security}, Sysdig \cite{sysdig_container_monitoring}, Alert Fatigue \cite{alert_fatigue_security}. \textbf{SME Context:} Cybersecurity Challenges \cite{sme_cybersecurity_challenges, sme_security_awareness}. \textbf{DevOps \& CI/CD:} DevSecOps \cite{devsecops_practices}, CI/CD Security \cite{cicd_security_pipeline}. \textbf{Advanced Topics:} ML Vulnerability \cite{ml_vulnerability_prediction, ml_malware_detection}, Threat Intel \cite{threat_intelligence_sharing}, Formal Methods \cite{formal_verification_security, tla_plus_configuration}.
 
 \section*{Acknowledgments}
 We thank the open-source community for tools (Trivy, kube-bench) and benchmarks (CIS) that enabled this research.

@@ -2,15 +2,18 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
-\citation{cloud_misconfiguration_2022,cis_config_hardening_2021}
-\citation{kubernetes_security_2023,docker_security_best_practices}
+\citation{cloud_misconfiguration_2022,cis_config_hardening_2021,sme_cybersecurity_challenges}
+\citation{nginx_security_hardening,apache_security_best_practices}
+\citation{docker_security_threats_2021,container_security_survey}
+\citation{kubernetes_security_2023,kubernetes_security_best_practices_2022}
+\citation{docker_security_best_practices,k8s_attack_matrix}
 \citation{trivy_aqua_security}
 \citation{kubebench_aquasec}
 \citation{anchore_engine}
 \citation{alert_fatigue_security}
 \citation{cvss_limitations_2020}
-\citation{automated_patch_management}
-\citation{sme_cybersecurity_challenges}
+\citation{automated_patch_management,automated_patch_generation_survey,program_repair_ml}
+\citation{sme_cybersecurity_challenges,sme_security_awareness}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-A}}Motivation and Problem Statement}{1}{subsection.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-B}}Research Questions}{1}{subsection.1.2}\protected@file@percent }
@@ -21,22 +24,30 @@
 \citation{kubebench_aquasec}
 \citation{anchore_engine}
 \citation{checkov_bridgecrew}
+\citation{iac_security_scanning_tools}
 \citation{cis_docker_benchmark}
 \citation{cis_kubernetes_benchmark}
+\citation{cis_config_hardening_2021}
 \citation{nist_container_security}
+\citation{alert_fatigue_security}
 \citation{falco_runtime_security,sysdig_container_monitoring}
 \citation{cvss_v31_specification,cvss_v40_specification}
 \citation{cvss_limitations_2020,improving_cvss_scoring}
 \citation{epss_first_org}
 \citation{ssvc_cisa}
 \citation{vpr_tenable}
-\citation{automated_patch_generation_survey,program_repair_ml}
+\citation{automated_patch_generation_survey,program_repair_ml,automated_bug_fixing_transformers}
 \citation{iac_security_scanning_tools}
-\citation{cloud_security_posture_management}
+\citation{cloud_security_posture_management,cloud_misconfiguration_2022}
 \citation{opa_styra}
 \citation{sentinel_hashicorp}
 \citation{ansible_security_automation,chef_compliance}
-\citation{program_repair_neural_networks,automated_bug_fixing_transformers}
+\citation{automated_patch_management}
+\citation{program_repair_neural_networks,automated_bug_fixing_transformers,program_repair_ml}
+\citation{nginx_security_hardening}
+\citation{docker_security_best_practices}
+\citation{kubernetes_security_best_practices_2022}
+\citation{cis_docker_benchmark,cis_kubernetes_benchmark}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-C}}Contributions}{2}{subsection.1.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {I-D}}Paper Organization}{2}{subsection.1.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.2}\protected@file@percent }
@@ -44,21 +55,32 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Risk Scoring and Prioritization}{2}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Automated Patch Management}{2}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Gap Analysis}{2}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {III}Methodology}{2}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}System Architecture}{2}{subsection.3.1}\protected@file@percent }
+\citation{trivy_aqua_security}
+\citation{kubebench_aquasec}
+\citation{cis_docker_benchmark,cis_kubernetes_benchmark}
+\citation{alert_fatigue_security}
+\citation{risk_assessment_frameworks}
 \citation{cvss_v31_specification}
+\citation{risk_assessment_frameworks}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Methodology}{3}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}System Architecture}{3}{subsection.3.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Seven-stage configuration hardening pipeline architecture.}}{3}{figure.1}\protected@file@percent }
 \newlabel{fig:architecture}{{1}{3}{Seven-stage configuration hardening pipeline architecture}{figure.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Deduplication Algorithm}{3}{subsection.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}CVSS-Inspired Risk Scoring Model}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}1}Exploit Likelihood ($E$)}{3}{subsubsection.3.3.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Exploit Likelihood Patterns (Sample)}}{3}{table.1}\protected@file@percent }
 \newlabel{tab:exploit_patterns}{{I}{3}{Exploit Likelihood Patterns (Sample)}{table.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}1}Exploit Likelihood ($E$)}{3}{subsubsection.3.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}2}CVSS Modifiers}{3}{subsubsection.3.3.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}3}Temporal Score ($T$)}{3}{subsubsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}4}Business Impact ($I$)}{3}{subsubsection.3.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}5}Confidence ($C$)}{3}{subsubsection.3.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Patch Generation}{3}{subsection.3.4}\protected@file@percent }
+\citation{devsecops_practices,cicd_security_pipeline}
+\citation{nginx_security_hardening}
+\citation{docker_security_threats_2021}
+\citation{trivy_aqua_security,kubebench_aquasec}
+\citation{cvss_v31_specification,risk_assessment_frameworks}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}4}Business Impact ($I$)}{4}{subsubsection.3.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {III-C}5}Confidence ($C$)}{4}{subsubsection.3.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Patch Generation}{4}{subsection.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Validation and Rollback}{4}{subsection.3.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {IV}Implementation}{4}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Technology Stack}{4}{subsection.4.1}\protected@file@percent }
@@ -67,73 +89,114 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Testing}{4}{subsection.4.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {V}Evaluation}{4}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Experimental Setup}{4}{subsection.5.1}\protected@file@percent }
-\citation{trivy_aqua_security}
-\citation{kubebench_aquasec}
-\citation{checkov_bridgecrew}
-\citation{falco_runtime_security}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Results}{5}{subsection.5.2}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Deduplication Results}}{5}{table.2}\protected@file@percent }
 \newlabel{tab:deduplication}{{II}{5}{Deduplication Results}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Results}{5}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}1}Deduplication Effectiveness}{5}{table.2}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Risk Score Summary}}{5}{table.3}\protected@file@percent }
 \newlabel{tab:risk_scores}{{III}{5}{Risk Score Summary}{table.3}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}2}Risk Score Distribution}{5}{table.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}3}Patch Generation and Validation}{5}{table.4}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Patch Pipeline Results}}{5}{table.4}\protected@file@percent }
 \newlabel{tab:patches}{{IV}{5}{Patch Pipeline Results}{table.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}3}Patch Generation and Validation}{5}{table.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}4}Performance}{5}{table.5}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Pipeline Performance}}{5}{table.5}\protected@file@percent }
 \newlabel{tab:performance}{{V}{5}{Pipeline Performance}{table.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\mbox  {V-B}4}Performance}{5}{table.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Comparison with Baselines}{5}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion}{5}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Strengths}{5}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Limitations}{5}{subsection.6.2}\protected@file@percent }
-\bibstyle{IEEEtran}
-\bibdata{refs}
-\bibcite{cloud_misconfiguration_2022}{1}
-\bibcite{cis_config_hardening_2021}{2}
-\bibcite{kubernetes_security_2023}{3}
-\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Comparison with Existing Tools}}{6}{table.6}\protected@file@percent }
-\newlabel{tab:comparison}{{VI}{6}{Comparison with Existing Tools}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {VI}{\ignorespaces Comparison with Existing Tools}}{5}{table.6}\protected@file@percent }
+\newlabel{tab:comparison}{{VI}{5}{Comparison with Existing Tools}{table.6}{}}
+\citation{falco_runtime_security,sysdig_container_monitoring}
+\citation{threat_intelligence_sharing}
+\citation{ml_vulnerability_prediction}
+\citation{ml_vulnerability_prediction,ml_malware_detection}
+\citation{threat_intelligence_sharing}
+\citation{formal_verification_security}
+\citation{tla_plus_configuration}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion}{6}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Strengths}{6}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Limitations}{6}{subsection.6.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}Threat Model and Assumptions}{6}{subsection.6.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-D}}Reproducibility}{6}{subsection.6.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Future Work}{6}{section.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{6}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{6}{section*.2}\protected@file@percent }
-\bibcite{docker_security_best_practices}{4}
-\bibcite{trivy_aqua_security}{5}
-\bibcite{kubebench_aquasec}{6}
-\bibcite{anchore_engine}{7}
-\bibcite{alert_fatigue_security}{8}
-\bibcite{cvss_limitations_2020}{9}
-\bibcite{automated_patch_management}{10}
-\bibcite{sme_cybersecurity_challenges}{11}
-\bibcite{nginx_security_hardening}{12}
-\bibcite{apache_security_best_practices}{13}
-\bibcite{docker_security_threats_2021}{14}
-\bibcite{container_security_survey}{15}
-\bibcite{kubernetes_security_best_practices_2022}{16}
-\bibcite{k8s_attack_matrix}{17}
-\bibcite{checkov_bridgecrew}{18}
-\bibcite{cis_docker_benchmark}{19}
-\bibcite{cis_kubernetes_benchmark}{20}
-\bibcite{nist_container_security}{21}
-\bibcite{falco_runtime_security}{22}
-\bibcite{sysdig_container_monitoring}{23}
-\bibcite{cvss_v31_specification}{24}
-\bibcite{cvss_v40_specification}{25}
-\bibcite{improving_cvss_scoring}{26}
-\bibcite{epss_first_org}{27}
-\bibcite{ssvc_cisa}{28}
-\bibcite{vpr_tenable}{29}
-\bibcite{automated_patch_generation_survey}{30}
-\bibcite{program_repair_ml}{31}
-\bibcite{iac_security_scanning_tools}{32}
-\bibcite{cloud_security_posture_management}{33}
-\bibcite{opa_styra}{34}
-\bibcite{sentinel_hashicorp}{35}
-\bibcite{ansible_security_automation}{36}
-\bibcite{chef_compliance}{37}
-\bibcite{program_repair_neural_networks}{38}
-\bibcite{automated_bug_fixing_transformers}{39}
-\gdef \@abspage@last{7}
+\citation{cvss_v31_specification,cvss_v40_specification}
+\citation{cis_docker_benchmark,cis_kubernetes_benchmark,cis_config_hardening_2021}
+\citation{nist_container_security}
+\citation{epss_first_org}
+\citation{ssvc_cisa}
+\citation{vpr_tenable}
+\citation{risk_assessment_frameworks,improving_cvss_scoring}
+\citation{trivy_aqua_security}
+\citation{kubebench_aquasec}
+\citation{anchore_engine}
+\citation{checkov_bridgecrew}
+\citation{docker_security_threats_2021,docker_security_best_practices,container_security_survey}
+\citation{kubernetes_security_2023,kubernetes_security_best_practices_2022,k8s_attack_matrix}
+\citation{cloud_misconfiguration_2022,cloud_security_posture_management}
+\citation{automated_patch_management,automated_patch_generation_survey}
+\citation{program_repair_ml,program_repair_neural_networks,automated_bug_fixing_transformers}
+\citation{iac_security_scanning_tools}
+\citation{nginx_security_hardening,apache_security_best_practices}
+\citation{opa_styra,sentinel_hashicorp}
+\citation{ansible_security_automation,chef_compliance}
+\citation{falco_runtime_security}
+\citation{sysdig_container_monitoring}
+\citation{alert_fatigue_security}
+\citation{sme_cybersecurity_challenges,sme_security_awareness}
+\citation{devsecops_practices}
+\citation{cicd_security_pipeline}
+\citation{ml_vulnerability_prediction,ml_malware_detection}
+\citation{threat_intelligence_sharing}
+\citation{formal_verification_security,tla_plus_configuration}
+\bibstyle{IEEEtran}
+\bibdata{refs}
+\bibcite{cloud_misconfiguration_2022}{1}
+\bibcite{cis_config_hardening_2021}{2}
+\bibcite{sme_cybersecurity_challenges}{3}
+\bibcite{nginx_security_hardening}{4}
+\bibcite{apache_security_best_practices}{5}
+\bibcite{docker_security_threats_2021}{6}
+\bibcite{container_security_survey}{7}
+\bibcite{kubernetes_security_2023}{8}
+\bibcite{kubernetes_security_best_practices_2022}{9}
+\bibcite{docker_security_best_practices}{10}
+\bibcite{k8s_attack_matrix}{11}
+\bibcite{trivy_aqua_security}{12}
+\bibcite{kubebench_aquasec}{13}
+\bibcite{anchore_engine}{14}
+\bibcite{alert_fatigue_security}{15}
+\bibcite{cvss_limitations_2020}{16}
+\bibcite{automated_patch_management}{17}
+\bibcite{automated_patch_generation_survey}{18}
+\bibcite{program_repair_ml}{19}
+\bibcite{sme_security_awareness}{20}
+\bibcite{checkov_bridgecrew}{21}
+\bibcite{iac_security_scanning_tools}{22}
+\bibcite{cis_docker_benchmark}{23}
+\bibcite{cis_kubernetes_benchmark}{24}
+\bibcite{nist_container_security}{25}
+\bibcite{falco_runtime_security}{26}
+\bibcite{sysdig_container_monitoring}{27}
+\bibcite{cvss_v31_specification}{28}
+\bibcite{cvss_v40_specification}{29}
+\bibcite{improving_cvss_scoring}{30}
+\bibcite{epss_first_org}{31}
+\bibcite{ssvc_cisa}{32}
+\bibcite{vpr_tenable}{33}
+\bibcite{automated_bug_fixing_transformers}{34}
+\@writefile{toc}{\contentsline {section}{References}{7}{section*.3}\protected@file@percent }
+\bibcite{cloud_security_posture_management}{35}
+\bibcite{opa_styra}{36}
+\bibcite{sentinel_hashicorp}{37}
+\bibcite{ansible_security_automation}{38}
+\bibcite{chef_compliance}{39}
+\bibcite{program_repair_neural_networks}{40}
+\bibcite{risk_assessment_frameworks}{41}
+\bibcite{devsecops_practices}{42}
+\bibcite{cicd_security_pipeline}{43}
+\bibcite{threat_intelligence_sharing}{44}
+\bibcite{ml_vulnerability_prediction}{45}
+\bibcite{ml_malware_detection}{46}
+\bibcite{formal_verification_security}{47}
+\bibcite{tla_plus_configuration}{48}
+\gdef \@abspage@last{8}
