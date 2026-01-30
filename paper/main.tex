@@ -31,19 +31,22 @@
 
 \author{
 \IEEEauthorblockN{Shreyas Gupta}
-\IEEEauthorblockA{\textit{Department of Computational Intelligence} \\
-\textit{SRM Institute of Science and Technology} \\
+\IEEEauthorblockA{Department of Computational Intelligence \\
+SRM Institute of Science and Technology \\
+Chennai, India \\
 sg0262@srmist.edu.in}
 \and
 \IEEEauthorblockN{Anurag Tomar}
-\IEEEauthorblockA{\textit{Department of Computational Intelligence} \\
-\textit{SRM Institute of Science and Technology} \\
+\IEEEauthorblockA{Department of Computational Intelligence \\
+SRM Institute of Science and Technology \\
+Chennai, India \\
 at8131@srmist.edu.in}
 \and
-\IEEEauthorblockN{Dr. T. Grace Shalini}
-\IEEEauthorblockA{\textit{Department of Computational Intelligence} \\
-\textit{SRM Institute of Science and Technology} \\
-gracesht@srmist.edu.in}
+\IEEEauthorblockN{Sowmya Jagadeesan}
+\IEEEauthorblockA{Department of Computational Intelligence \\
+SRM Institute of Science and Technology \\
+Chennai, India \\
+sowmyaj@srmist.edu.in}
 }
 
 \maketitle
@@ -568,13 +571,14 @@ Our system uniquely integrates all six capabilities. Commercial Cloud Security P
 
 All code, tests, fixtures, and dashboard are open-source:
 \begin{itemize}
-    \item Repository: \url{https://github.com/contact-shreyas/HardenerAI}
+    \item Repository: \url{https://github.com/contact-shreyas/HardenerAI} (MIT License)
+    \item Clone: \texttt{git clone https://github.com/contact-shreyas/HardenerAI.git}
     \item Build: \texttt{pnpm install \&\& pnpm build}
     \item Tests: \texttt{pnpm test} (21 tests, 100\% pass)
     \item Usage: \texttt{pnpm harden --target ./fixtures}
 \end{itemize}
 
-Docker image available for reproducible environments. CI/CD pipeline definition in \texttt{.github/workflows/ci.yml}.
+Docker image available for reproducible environments. CI/CD pipeline definition in \texttt{.github/workflows/ci.yml}. All dependencies are pinned in \texttt{pnpm-lock.yaml} for deterministic builds.
 
 \section{Future Work}
 
